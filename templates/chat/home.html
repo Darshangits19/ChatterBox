@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body_class %}dashboard-bg{% endblock %}
+
+{% block content %}
+<nav class="navbar">
+    <a href="{% url 'chat:home' %}" class="logo">ChatApp</a>
+    <div class="nav-links">
+        {% if user.is_authenticated %}
+            <span>Welcome, {{ user.username }}</span>
+            <form action="{% url 'users:logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-logout">Logout</button>
+            </form>
+        {% endif %}
+    </div>
+</nav>
+
+<div class="page-container">
+    <div class="dashboard-grid">
+        <div class="user-list-card">
+            <h3>My Friends</h3>
+            <ul class="user-list">
+                {% for friend in friends %}
+                    <li>
+                        <span>{{ friend.username }}</span>
+                        <a href="{% url 'chat:private_chat' friend.username %}" class="btn btn-chat">Chat</a>
+                    </li>
+                {% empty %}
+                    <li>No friends yet. Add some!</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="user-list-card">
+            <h3>Friend Requests</h3>
+            <ul class="user-list">
+                {% for friendship in pending_requests %}
+                    <li>
+                        <span>{{ friendship.creator.username }}</span>
+                        <div class="actions">
+                            <a href="{% url 'chat:manage_friend_request' friendship.id 'accept' %}" class="btn btn-accept">Accept</a>
+                            <a href="{% url 'chat:manage_friend_request' friendship.id 'decline' %}" class="btn btn-decline">Decline</a>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li>No new friend requests.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="user-list-card">
+            <h3>Other Users</h3>
+            <ul class="user-list">
+                {% for user in other_users %}
+                    <li>
+                        <span>{{ user.username }}</span>
+                        <a href="{% url 'chat:send_friend_request' user.id %}" class="btn">Add Friend</a>
+                    </li>
+                {% empty %}
+                    <li>No other users found.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

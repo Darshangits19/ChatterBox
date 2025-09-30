@@ -1,0 +1,232 @@
+/* static/css/style.css (Full Professional Redesign) */
+
+/* === 1. New Professional Color Palette & Variables === */
+:root {
+    /* Primary/Accent Colors */
+    --primary-color: #7c3aed;         /* A vibrant, modern violet */
+    --primary-hover-color: #6d28d9;    /* A slightly darker violet for hover */
+
+    /* Background & Surface Colors */
+    --background-start: #0f172a;       /* Deep, dark slate blue */
+    --background-end: #1e293b;         /* Slightly lighter slate */
+    --surface-color: rgba(255, 255, 255, 0.07); /* Frosted Glass background */
+
+    /* Text Colors */
+    --text-color: #cbd5e1;             /* Light gray for body text (easier on eyes) */
+    --heading-color: #f8fafc;          /* Brighter white for headings */
+    --text-dark-color: #333;           /* For light backgrounds like chat bubbles */
+
+    /* UI Feedback Colors */
+    --success-color: #22c55e;
+    --danger-color: #ef4444;
+    --border-color: rgba(255, 255, 255, 0.1);
+    
+    /* Font & Layout */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --border-radius: 12px;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+/* === 2. Main Body and Background === */
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* Specific backgrounds for login and dashboard */
+.auth-bg, .dashboard-bg {
+    background-image: linear-gradient(135deg, var(--background-start), var(--background-end));
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Main content container */
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+/* === 3. Glassmorphism Form (Login/Signup) === */
+.form-container {
+    background: var(--surface-color);
+    padding: 2.5rem 3rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 32px 0 var(--shadow-color);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 450px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--heading-color);
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-container input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.9rem 1.2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--heading-color);
+    transition: all 0.3s ease;
+}
+
+.form-container input::placeholder { color: rgba(200, 200, 200, 0.7); }
+
+.form-container input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);
+    border-color: var(--primary-color);
+}
+
+/* === 4. Dashboard (Home Page) === */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.user-list-card {
+    background: var(--surface-color);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 32px 0 var(--shadow-color);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.user-list-card h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: var(--heading-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.user-list {
+    list-style: none; padding: 0; margin: 0;
+}
+
+.user-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.user-list li:hover { background-color: rgba(255, 255, 255, 0.05); }
+.user-list .actions { display: flex; gap: 0.5rem; }
+
+/* === 5. Buttons === */
+.btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--heading-color);
+    padding: 0.9rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+    background-color: var(--primary-hover-color);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+
+.btn-chat, .btn-accept {
+    background-color: var(--success-color); width: auto; padding: 0.5rem 1rem;
+}
+.btn-decline {
+    background-color: var(--danger-color); width: auto; padding: 0.5rem 1rem;
+}
+
+/* === 6. Chat Page Styles (Unchanged for consistency) === */
+.chat-container {
+    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.chat-header {
+    padding: 0.8rem 1.5rem; background-color: #f0f2f5; color: var(--text-dark-color); border-bottom: 1px solid var(--border-color); flex-shrink: 0;
+}
+.chat-log {
+    flex-grow: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column;
+}
+.message { display: flex; margin-bottom: 0.75rem; max-width: 65%; }
+.message p { padding: 0.6rem 0.9rem; border-radius: var(--border-radius); margin: 0; line-height: 1.4; word-wrap: break-word; box-shadow: 0 1px 1px var(--shadow-color); color: var(--text-dark-color); }
+.message.sender { align-self: flex-end; }
+.message.sender p { background: #dcf8c6; border-bottom-right-radius: 2px; }
+.message.receiver { align-self: flex-start; }
+.message.receiver p { background: #ffffff; border-bottom-left-radius: 2px; }
+.chat-input-form { display: flex; padding: 0.75rem 1rem; background-color: #f0f2f5; align-items: center; flex-shrink: 0; }
+#chat-message-input { flex-grow: 1; padding: 0.8rem 1.2rem; border: none; border-radius: 20px; margin-right: 0.5rem; font-size: 1rem; }
+#chat-message-input:focus {
+    outline: none;
+}
+#chat-message-submit {
+    background: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+#chat-message-submit:hover {
+    background-color: var(--primary-hover-color);
+}
+#chat-message-submit::after {
+    content: '➤';
+    transform: rotate(-45deg);
+    margin-top: -3px;
+}
